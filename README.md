@@ -1,151 +1,151 @@
-# HFSkill - Hugging Face Spaces Management Toolkit
+# HFSkill - Hugging Face Spaces 管理工具包
 
-A comprehensive command-line toolkit for managing and interacting with Hugging Face Spaces. This skill provides easy-to-use operations for listing, monitoring, and controlling Hugging Face Spaces through Python scripts.
+一個全面的命令列工具包，用於管理和操作 Hugging Face Spaces。本工具提供了易於使用的操作功能，透過 Python 腳本來列出、監控和控制 Hugging Face Spaces。
 
-## Features
+## 功能特色
 
-- **List Spaces**: Search and filter Spaces by author or keyword
-- **Space Information**: Get detailed metadata about any Space
-- **Runtime Management**: Restart or pause Spaces
-- **Status Monitoring**: Check Space runtime state and hardware configuration
-- **User Spaces**: List all Spaces owned by a specific user
+- **列出 Spaces**：依作者或關鍵字搜尋和過濾 Spaces
+- **Space 資訊**：取得任何 Space 的詳細元數據
+- **執行環境管理**：重新啟動或暫停 Spaces
+- **狀態監控**：檢查 Space 執行環境狀態和硬體配置
+- **使用者 Spaces**：列出特定使用者擁有的所有 Spaces
 
-## Installation
+## 安裝方式
 
-1. Clone this repository:
+1. 複製此倉庫：
 ```bash
-git clone https://github.com/yourusername/hfskill.git
+git clone https://github.com/joshhu/hfskill.git
 cd hfskill
 ```
 
-2. Install dependencies:
+2. 安裝相依套件：
 ```bash
 pip install huggingface_hub
 ```
 
-## Authentication
+## 身份驗證
 
-Most operations require a Hugging Face access token. Configure authentication using one of these methods:
+大多數操作需要 Hugging Face 存取權杖。使用以下其中一種方法配置身份驗證：
 
-### Option 1: Environment Variable (Recommended)
+### 選項 1：環境變數（建議）
 ```bash
 export HF_TOKEN="hf_your_token_here"
 ```
 
-### Option 2: Command-line Parameter
+### 選項 2：命令列參數
 ```bash
 python3 scripts/space_operations.py --token "hf_your_token_here" <command>
 ```
 
-**Token Requirements:**
-- Read operations: Token optional for public Spaces
-- Write operations (restart/pause): Token required with write permissions
+**權杖需求：**
+- 讀取操作：公開 Spaces 可選擇性提供權杖
+- 寫入操作（重新啟動/暫停）：必須提供具有寫入權限的權杖
 
-## Usage
+## 使用方法
 
-### List Spaces
+### 列出 Spaces
 ```bash
-# List recent Spaces
+# 列出最近的 Spaces
 python3 scripts/space_operations.py list --limit 10
 
-# List Spaces by author
+# 列出特定作者的 Spaces
 python3 scripts/space_operations.py list --author stabilityai
 
-# Search Spaces
+# 搜尋 Spaces
 python3 scripts/space_operations.py list --search "chatbot"
 ```
 
-### Get Space Information
+### 取得 Space 資訊
 ```bash
 python3 scripts/space_operations.py info stabilityai/stable-diffusion
 ```
 
-### Restart a Space
+### 重新啟動 Space
 ```bash
 python3 scripts/space_operations.py restart myusername/my-space
 ```
 
-### Pause a Space
+### 暫停 Space
 ```bash
 python3 scripts/space_operations.py pause myusername/my-space
 ```
 
-### Get Space Runtime Status
+### 取得 Space 執行狀態
 ```bash
 python3 scripts/space_operations.py runtime stabilityai/stable-diffusion
 ```
 
-### List User's Spaces
+### 列出使用者的 Spaces
 ```bash
 python3 scripts/space_operations.py user stabilityai
 ```
 
-## Space ID Format
+## Space ID 格式
 
-All Spaces are identified using the format: `username/space-name`
+所有 Spaces 使用以下格式識別：`username/space-name`
 
-Examples:
+範例：
 - `stabilityai/stable-diffusion`
 - `openai/whisper`
 - `meta-llama/llama-2-chat`
 
-## Common Workflows
+## 常用工作流程
 
-### Monitor and Restart a Space
+### 監控並重新啟動 Space
 ```bash
-# Check Space status
+# 檢查 Space 狀態
 python3 scripts/space_operations.py runtime myusername/my-space
 
-# Restart if needed
+# 如有需要則重新啟動
 python3 scripts/space_operations.py restart myusername/my-space
 ```
 
-### Search and Explore Spaces
+### 搜尋並探索 Spaces
 ```bash
-# Search for chatbot Spaces
+# 搜尋聊天機器人 Spaces
 python3 scripts/space_operations.py list --search "chatbot" --limit 20
 
-# Get detailed info
+# 取得詳細資訊
 python3 scripts/space_operations.py info username/interesting-space
 ```
 
-## Project Structure
+## 專案結構
 
 ```
 hfskill/
-├── SKILL.md                    # Detailed skill documentation
-├── README.md                   # This file
+├── SKILL.md                    # 詳細技能文件
+├── README.md                   # 本檔案
 ├── scripts/
-│   └── space_operations.py     # Main executable script
+│   └── space_operations.py     # 主要執行腳本
 └── references/
-    └── spaces_reference.md     # API reference documentation
+    └── spaces_reference.md     # API 參考文件
 ```
 
-## Error Handling
+## 錯誤處理
 
-Common errors and solutions:
+常見錯誤及解決方案：
 
-- **"No HF_TOKEN found"**: Set the environment variable or pass `--token`
-- **401 Unauthorized**: Invalid or expired token
-- **403 Forbidden**: Insufficient permissions or not the Space owner
-- **404 Not Found**: Space doesn't exist or is private
-- **429 Too Many Requests**: Rate limit exceeded, wait before retrying
+- **"No HF_TOKEN found"**：設定環境變數或傳入 `--token`
+- **401 Unauthorized**：權杖無效或已過期
+- **403 Forbidden**：權限不足或非 Space 擁有者
+- **404 Not Found**：Space 不存在或為私有
+- **429 Too Many Requests**：超過速率限制，請稍後重試
 
-## Documentation
+## 文件
 
-For detailed information about Space states, hardware options, and API specifics, refer to:
-- `SKILL.md` - Complete skill documentation
-- `references/spaces_reference.md` - API reference
+有關 Space 狀態、硬體選項和 API 詳細資訊，請參閱：
+- `SKILL.md` - 完整技能文件
+- `references/spaces_reference.md` - API 參考
 
-## Requirements
+## 系統需求
 
 - Python 3.6+
-- `huggingface_hub` package
+- `huggingface_hub` 套件
 
-## License
+## 授權
 
 MIT License
 
-## Contributing
+## 貢獻
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+歡迎貢獻！請隨時提交 Pull Request。
